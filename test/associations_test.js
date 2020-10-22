@@ -27,7 +27,7 @@ describe('Association between collections test', () => {
     });
 
 
-    it.only('association test', (done) => {
+    it('association test', (done) => {
         User.findOne({ name: 'Joe' })
             .populate({
                 path: 'blogPosts',

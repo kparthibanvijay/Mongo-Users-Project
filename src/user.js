@@ -21,6 +21,17 @@ UserSchema.virtual('postCount').get(function(){
     return this.posts.length;
 });
 
+// remove all blogpost before removing users
+// next moves to the next middlewaare (pre hook) if there is one
+UserSchema.pre('remove', function(next){
+    // avoid require blogpost here to avoid cyclic requires
+    const BlogPost = mongoose.model('blogPost');
+
+    // remove all blog post with id in blogPosts
+    BlogPost.remove({_id: {$in: this.blogPosts}})
+        .then(()=>next());
+});
+
 const User = mongoose.model('user', UserSchema);
 
 module.exports = User;
