@@ -27,9 +27,12 @@ UserSchema.pre('remove', function(next){
     // avoid require blogpost here to avoid cyclic requires
     const BlogPost = mongoose.model('blogPost');
 
+    console.log('asdasdasdasdasdadasdasdad');
+
     // remove all blog post with id in blogPosts
     BlogPost.remove({_id: {$in: this.blogPosts}})
         .then(()=>next());
+    
 });
 
 const User = mongoose.model('user', UserSchema);

@@ -31,27 +31,25 @@ describe('updating users', () => {
         assertName(joe.updateOne({ name: 'Alex' }), done);
     });
 
-    it('a model class can update', (done)=>{
-        assertName(User.updateOne({name: 'Joe'}, {name: 'Alex'}), done);
+    it('a model class can update', (done) => {
+        assertName(User.updateOne({ name: 'Joe' }, { name: 'Alex' }), done);
     });
 
-    it('a model class can update one record', (done)=>{
-        assertName(User.findOneAndUpdate({name: 'Joe'}, {name: 'Alex'}), done());
+    it('a model class can update one record', (done) => {
+        assertName(User.findOneAndUpdate({ name: 'Joe' }, { name: 'Alex' }), done());
     });
 
-    it('a model class can find a record with an id and update', (done)=>{
-       assertName(User.findByIdAndUpdate(joe._id, {name: 'Alex'}), done);
+    it('a model class can find a record with an id and update', (done) => {
+        assertName(User.findByIdAndUpdate(joe._id, { name: 'Alex' }), done);
     });
 
-    it('a user can have there post count incremented by 1', (done)=>{
-        User.updateMany({name: 'Joe'}, {$inc: {likes: 1}})
-        .then(()=>User.findOne({name: 'Joe'}))
-        .then((user)=>{
-            assert(user.likes === 1);
-            done(0);
-        });
-
-        
+    it('a user can have there post count incremented by 1', (done) => {
+        User.updateMany({ name: 'Joe' }, { $inc: { likes: 1 } })
+            .then(() => User.findOne({ name: 'Joe' }))
+            .then((user) => {
+                assert(user.likes === 1);
+                done(0);
+            });
     });
 
 });
